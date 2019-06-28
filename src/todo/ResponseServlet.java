@@ -64,7 +64,7 @@ public class ResponseServlet extends HttpServlet {
 			try (Connection conn = DriverManager.getConnection(url + servername + ":" + port + ":" + sid, user, pass);
 					Statement stmt = conn.createStatement();
 					ResultSet rs = stmt.executeQuery(
-							"SELECT * FROM TODOLIST ORDER BY IMPORTANT desc")) {
+							"SELECT * FROM TODOLIST ORDER BY DAY asc,IMPORTANT desc")) {
 				while (rs.next()) {
 					TodoRecordBean todoBean = new TodoRecordBean();
 					todoBean.setID(rs.getInt("ID"));

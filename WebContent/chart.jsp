@@ -15,6 +15,7 @@
 <body>
 <header>
 <h1>OTODO</h1>
+<span id="view_clock"></span>
 <nav>
 	<ul class="nav nav-tabs nav-justified" style="background-color:#ff8c00" style="color:#000000">
 		<li><a href="index.jsp">タスク登録</a>
@@ -22,6 +23,7 @@
 		<li><a href="chart.jsp">チャート</a>
 	</ul>
 </nav>
+
 </header>
 <h1>株価表示画面</h1>
 <!-- TradingView Widget BEGIN -->

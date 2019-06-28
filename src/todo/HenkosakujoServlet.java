@@ -74,6 +74,7 @@ public class HenkosakujoServlet extends HttpServlet {
 						Statement stmt = conn.createStatement()) {
 					stmt.executeUpdate(
 							"UPDATE TODOLIST SET IMPORTANT='" + importants + "',NAIYOU='" + infomartion + "',DAY='" + Date + "',BIKOU='" + Bikou + "' WHERE ID=" + hen);
+					conn.commit();
 				}
 			} catch (Exception e) {
 				e.printStackTrace();

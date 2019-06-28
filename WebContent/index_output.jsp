@@ -1,4 +1,4 @@
-<%@ page import="todo.TodoRecordBean" import="java.util.ArrayList" %>
+<%@ page import="todo.TodoRecordBean" import="java.util.ArrayList" import="java.sql.Timestamp" import="java.text.SimpleDateFormat" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -16,6 +16,8 @@
 <body>
 <header>
 <h1>OTODO</h1>
+<span id="view_clock"></span>
+
 <nav>
 	<ul class="nav nav-tabs nav-justified" style="background-color:#ff8c00" style="color:#000000">
 		<li><a href="index.jsp">タスク登録</a>
@@ -23,6 +25,7 @@
 		<li><a href="chart.jsp">チャート</a>
 	</ul>
 </nav>
+
 </header>
 <div class="container" role="main">
 	<h1>ToDoアプリケーション</h1>
@@ -36,14 +39,16 @@
 	<tr class="table2"><td>No.</td><td>重要度</td><td>内容</td><td>日付</td><td>備考</td><td>削除</td></tr>
 	<%
 		int a = 0;
+		String iff = null;
 		int[] m = new int[100];
 		ArrayList<TodoRecordBean> todoArray = todoaBean.getTodoArray();
 		int j =1;
 		for(TodoRecordBean trb : todoArray){
 			a = trb.getID();
 			m[j] = a;
-			out.println("<tr Class=\"even\"><td>"+j+"</td><td>"+ trb.getImporta() + "</td><td>"+trb.getInfo() +"</td><td>"+
-		trb.getDay()+"</td><td>"+ trb.getBikou() +"</td><td>"
+			iff = trb.getDay();
+			out.println("<tr class=\"even\"><td>"+j+"</td><td>"+ trb.getImporta() + "</td><td>"+trb.getInfo() +"</td><td>"+
+			iff+"</td><td>"+ trb.getBikou() +"</td><td>"
 			+"<form action=\"HenkosakujoServlet\" method=\"post\">"
 			+"<input type=\"hidden\" name=\"sakujo\" value="+j+">"
 			+"<input type=\"hidden\" name=\"henko\" value=\"0\">"
@@ -77,7 +82,7 @@
             </div>
             <!-- 5.モーダルのボディ -->
             <div class="modal-body">
-                項目番号： <select name="henko">
+                項目番号： <select required name="henko" >
 		<%	int f= 1;
 		for(int i=1;size >= i;i++){
 			out.println("<option value=\""+i+"\">"+i+"</option>");
@@ -90,7 +95,7 @@
 			%>
 			</select><br>
 			重要度　：
-			<select name="important">
+			<select required name="important">
 				<option value=""></option>
 				<option value="5">5</option>
 				<option value="4">4</option>
@@ -99,11 +104,11 @@
 				<option value="1">1</option>
 			</select><br>
 			内容　　：
-				<input type="text" name="info" size=20 value=""><br>
+				<input required type="text" name="info" size=20 value=""><br>
 			日付　　：
-				<input type="date" name="day"><br>
+				<input required type="date" name="day"><br>
 			備考　　：
-				<input type="text" name="biko" size=30 value=""><br>
+				<input required type="text" name="biko" size=30 value=""><br>
             </div>
             <!-- 6.モーダルのフッタ -->
             <div class="modal-footer">
